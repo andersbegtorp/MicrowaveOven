@@ -7,6 +7,7 @@ using MicrowaveOvenClasses.Boundary;
 using MicrowaveOvenClasses.Controllers;
 using MicrowaveOvenClasses.Interfaces;
 using NSubstitute;
+using NSubstitute.Core.Arguments;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 
@@ -96,7 +97,64 @@ namespace Microwave.Test.Integration
             _output.DidNotReceive().OutputLine(Arg.Any<string>());
         }
 
+        //DoorClosed
 
+        [Test]
+        public void OnDoorClosed_StateIsReady_LightRecievesNoCalls()
+        {
+            _door.Close();
+
+            _output.DidNotReceive().OutputLine(Arg.Any<string>());
+        }
+
+        [Test]
+        public void OnDoorClosed_StateIsSetPower_LightRecievesNoCalls()
+        {
+            _userInterface.OnPowerPressed(_powerButton, EventArgs.Empty);
+            _output.ClearReceivedCalls();
+
+            _door.Close();
+
+            _output.DidNotReceive().OutputLine(Arg.Any<string>());
+        }
+
+        [Test]
+        public void OnDoorClosed_StateIsSetTime_LightRecievesNoCalls()
+        {
+            _userInterface.OnPowerPressed(_powerButton, EventArgs.Empty);
+            _userInterface.OnTimePressed(_timeButton, EventArgs.Empty);
+            _output.ClearReceivedCalls();
+
+            _door.Close();
+
+            _output.DidNotReceive().OutputLine(Arg.Any<string>());
+        }
+
+        [Test]
+        public void OnDoorClosed_StateIsCooking_LightRecievesNoCalls()
+        {
+            _userInterface.OnPowerPressed(_powerButton, EventArgs.Empty);
+            _userInterface.OnTimePressed(_timeButton, EventArgs.Empty);
+            _userInterface.OnStartCancelPressed(_startCancelButton, EventArgs.Empty);
+
+            _output.ClearReceivedCalls();
+
+            _door.Close();
+
+            _output.DidNotReceive().OutputLine(Arg.Any<string>());
+        }
+
+        [Test]
+        public void OnDoorClosed_StateIsDoorOpen_LightIsTurnedOff()
+        {
+            _userInterface.OnDoorOpened(_door, EventArgs.Empty);
+            _output.ClearReceivedCalls();
+
+
+            _door.Close();
+
+            _output.Received().OutputLine(Arg.Is<string>(s => s.Contains("off")));
+        }
 
 
     }
