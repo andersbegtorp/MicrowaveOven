@@ -60,6 +60,7 @@
     <Compile Include="IT2_Light_Output.cs" />
     <Compile Include="IT4_CookController_Display.cs" />
     <Compile Include="IT3_PowerTube_Output.cs" />
+    <Compile Include="IT5_CookController_PowerTube.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

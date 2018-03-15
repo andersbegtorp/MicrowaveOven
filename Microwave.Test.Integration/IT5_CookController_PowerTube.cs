@@ -2,22 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Schema;
 using MicrowaveOvenClasses.Boundary;
 using MicrowaveOvenClasses.Controllers;
 using MicrowaveOvenClasses.Interfaces;
 using NSubstitute;
-using NSubstitute.Core.Arguments;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
-using Timer = MicrowaveOvenClasses.Boundary.Timer;
 
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    class IT4_CookController_Display
+    class IT5_CookController_PowerTube
     {
         private IUserInterface _ui;
         private IDisplay _display;
@@ -32,24 +27,18 @@ namespace Microwave.Test.Integration
             _output = Substitute.For<IOutput>();
             _ui = Substitute.For<IUserInterface>();
             _display = new Display(_output);
-            _powerTube = Substitute.For<IPowerTube>();
+            _powerTube = new PowerTube(_output);
             _timer = Substitute.For<ITimer>();
             _cookController = new CookController(_timer, _display, _powerTube);
             _cookController.UI = _ui;
 
         }
 
-        [TestCase(120, 2, 0)]
-        [TestCase(130, 2, 10)]
-        public void OnTimerTick_ShowsTimeRemaining_RemainingTimeIsCorrect(int totalSeconds, int min, int sec)
+        [TestCase(12,12)]
+        public void StartCooking_OutputShowsPower_PowerIsCorrect(int power, int time)
         {
-            _timer.TimeRemaining.Returns(totalSeconds);
-            
-            _cookController.OnTimerTick(_timer, EventArgs.Empty);
-
-            string compareString = $"Display shows: {min:D2}:{sec:D2}";
-            _output.Received().OutputLine(compareString);
-
+            _cookController.StartCooking(power, time);
+            _output.OutputLine(Arg.Is<string>(str => str.Contains(power +" %")));
         }
 
 
