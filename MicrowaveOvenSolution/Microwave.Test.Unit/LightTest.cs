@@ -38,8 +38,9 @@ namespace Microwave.Test.Unit
         public void TurnOn_WasOn_CorrectOutput()
         {
             uut.TurnOn();
+            output.ClearReceivedCalls();
             uut.TurnOn();
-            output.Received(1).OutputLine(Arg.Is<string>(str => str.Contains("on")));
+            output.DidNotReceive().OutputLine(Arg.Is<string>(str => str.Contains("on")));
         }
 
         [Test]
