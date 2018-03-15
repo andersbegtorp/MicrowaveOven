@@ -61,6 +61,9 @@
     <Compile Include="IT4_CookController_Display.cs" />
     <Compile Include="IT3_PowerTube_Output.cs" />
     <Compile Include="IT5_CookController_PowerTube.cs" />
+    <Compile Include="IT6_UserInterface_Light.cs" />
+    <Compile Include="IT7_UserInterface_Door.cs" />
+    <Compile Include="ITX_UserInterFace_StartCancelButton.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
