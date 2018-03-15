@@ -12,7 +12,7 @@ using NUnit.Framework.Internal;
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    class IT3_PowerTube
+    class IT3_PowerTube_Output
     {
         private PowerTube _powerTube;
         private IOutput _output;

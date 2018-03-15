@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT2_Light
+    public class IT2_Light_Output
     {
         private ILight _light;
         private IOutput _output;
