@@ -28,7 +28,7 @@ namespace Microwave.Test.Integration
         public void TurnOn_WasOff_CorrectOutput()
         {
             _powerTube.TurnOn(50);
-            _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("50 %")));
+            _output.Received().OutputLine(Arg.Is<string>(str => str.Contains("50 W")));
         }
 
 
@@ -55,7 +55,7 @@ namespace Microwave.Test.Integration
         [Test]
         public void TurnOn_HighPower_ThrowsException()
         {
-            Assert.Throws<System.ArgumentOutOfRangeException>(() => _powerTube.TurnOn(101));
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => _powerTube.TurnOn(701));
         }
 
         [Test]

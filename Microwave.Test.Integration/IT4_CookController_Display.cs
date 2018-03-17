@@ -39,8 +39,8 @@ namespace Microwave.Test.Integration
 
         }
 
-        [TestCase(120, 2, 0)]
-        [TestCase(130, 2, 10)]
+        [TestCase(120000, 2, 0)]
+        [TestCase(130000, 2, 10)]
         public void OnTimerTick_ShowsTimeRemaining_RemainingTimeIsCorrect(int totalSeconds, int min, int sec)
         {
             _timer.TimeRemaining.Returns(totalSeconds);
