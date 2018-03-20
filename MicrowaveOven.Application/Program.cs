@@ -41,6 +41,41 @@ namespace MicrowaveOven.Application
                 _cookController);
             _cookController.UI = _userInterface;
 
+            bool running = true;
+            Console.WriteLine("Press P for powerbutton");
+            Console.WriteLine("Press T for timebutton");
+            Console.WriteLine("Press S for Start-Cancelbutton");
+            Console.WriteLine("Press O for Open door");
+            Console.WriteLine("Press C for Close door");
+            Console.WriteLine("Press E for Exit application");
+
+
+            while (running)
+            {
+                var key = Console.ReadKey(true);
+
+                switch (key.KeyChar)
+                {
+                    case 'p':
+                        _powerButton.Press();
+                        break;
+                    case 't':
+                        _timeButton.Press();
+                        break;
+                    case 's':
+                        _startCancelButton.Press();
+                        break;
+                    case 'o':
+                        _door.Open();
+                        break;
+                    case 'c':
+                        _door.Close();
+                        break;
+                    case 'e':
+                        running = false;
+                        break;
+                }
+            }
         }
     }
 }
